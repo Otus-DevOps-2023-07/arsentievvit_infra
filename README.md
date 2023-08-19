@@ -37,5 +37,5 @@ Host someinternalhost
 На nip.io рейт лимит, воспользовался sslip.io \
 Адрес: https://vpn-158-160-117-90.sslip.io
 
-bastion_IP = 158.160.117.90 \
+bastion_IP = 158.160.117.90
 someinternalhost_IP = 10.128.0.28
