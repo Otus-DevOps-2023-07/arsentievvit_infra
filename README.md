@@ -11,9 +11,9 @@ arsentievvit Infra repository
 
 ## Для доступа к хосту внутренней сети одной командой
 
-Без исправления конфигов:\
-
-``` ssh -J appuser@<IP> appuser@someinternalhost
+Без исправления конфигов:
+```
+ssh -J appuser@<IP> appuser@someinternalhost
 ```
 
 ## Если пошаманить
