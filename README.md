@@ -3,6 +3,9 @@ arsentievvit Infra repository
 
 # ДЗ №4
 
+testapp_IP = 158.160.100.176
+testapp_port = 9292
+
 ## Основная часть
 
 - Опробован инструмент yc, с помощью него создан инстанс с заданными параметрами
@@ -84,9 +87,6 @@ write_files:
 runcmd:
   [ sh, /home/yc-user/startup.sh ]
 ```
-
-testapp_IP = 158.160.100.176 \
-testapp_port = 9292
 
 # ДЗ №3
 
