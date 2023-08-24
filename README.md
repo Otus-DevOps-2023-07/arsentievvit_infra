@@ -124,5 +124,5 @@ runcmd:
   [ sh, /home/yc-user/startup.sh ]
 ```
 
-testapp_IP = 158.160.100.176 \
-testapp_port = 9292
+158.160.100.176 \
+9292
