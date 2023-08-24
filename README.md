@@ -40,7 +40,7 @@ Host someinternalhost
 bastion_IP = 158.160.117.90 \
 someinternalhost_IP = 10.128.0.28
 
-#ДЗ 4
+# ДЗ №4
 
 ## Основная часть
 
@@ -52,10 +52,10 @@ someinternalhost_IP = 10.128.0.28
 ## Дополнительная часть
 
 Пришлось повозиться. Не знаю правильно ли я сделал но результат есть. \
-В итоге собран общий startup_script.sh, который сам по себе на инстанс не отправляется. \
+В итоге собран общий startup.sh, который сам по себе на инстанс не отправляется. \
 Вместо этого был написан userdata.yaml для cloud-init. Через модуль write_files, с указанным \
 content ```base64 -i startup_script.sh -o /dev/sdtout``` \
-на инстансе воссоздаётся тот самый startup_script.sh, который потом выполняется с помощью команды ```runcmd```.
+на инстансе воссоздаётся тот самый startup.sh, который потом выполняется с помощью команды ```runcmd```.
 
 ## Как запустить
 
@@ -70,4 +70,58 @@ content ```base64 -i startup_script.sh -o /dev/sdtout``` \
 - Ждем минуты 3-4
 - Проверяем доступность по IP с портом 9292
 
-testapp_IP = 158.160.100.176 testapp_port = 9292
+createvm.sh
+```
+yc compute instance create \
+  --name reddit-app \
+  --hostname reddit-app \
+  --memory=4 \
+  --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB \
+  --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
+  --metadata serial-port-enable=1 \
+  --metadata-from-file user-data=userdata.yaml
+```
+startup.sh
+```
+#!/bin/sh
+sudo apt update -y && \
+sudo apt install -y git mongodb ruby-full ruby-bundler build-essential
+
+[ -e /usr/bin/mongo ] && sudo systemctl enable mongodb
+sudo systemctl start mongodb
+
+git clone -b monolith https://github.com/express42/reddit.git /home/yc-user/redditapp && \
+cd /home/yc-user/redditapp
+chown -R yc-user:yc-user /home/yc-user
+[ -e /usr/bin/bundle ] && bundle install
+su - yc-user -c "cd redditapp;puma -d"
+sleep 10
+IP=`curl 2ip.ru`
+PORT=`ps aux | grep puma | grep -v grep | sed -n 's/.*:\([0-9]\+\).*/\1/p'`
+echo "$IP:$PORT" > /home/yc-user/connect.txt
+```
+
+userdata.yaml
+```
+#cloud-config
+datasource:
+ Ec2:
+  strict_id: false
+ssh_pwauth: no
+users:
+- name: yc-user
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - {SSH_KEY}
+write_files:
+- encoding: b64
+  content: {base64 of startup.sh}
+  owner: yc-user:yc-user
+  path: /home/yc-user/startup.sh
+  permissions: '0755'
+runcmd:
+  [ sh, /home/yc-user/startup.sh ]
+
+testapp_IP = 158.160.100.176 \
+testapp_port = 9292
