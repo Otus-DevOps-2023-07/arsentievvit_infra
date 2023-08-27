@@ -1,0 +1,5 @@
+{
+    "yc_service_account_key_file": "{env `YC_SERVICE_ACCOUNT_KEY_FILE`}",
+    "yc_folder_id": "{env `YC_FOLDER_ID`}",
+    "yc_subnet_id": "{env `YC_VPC_ID`}"
+}
