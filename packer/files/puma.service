@@ -1,0 +1,12 @@
+[Unit]
+Description=Puma Reddit Server
+After=network.target mongodb.service
+
+[Service]
+WorkingDirectory=/home/ubuntu/reddit
+ExecStart=/usr/local/bin/puma --dir /home/ubuntu/reddit -C /home/ubuntu/reddit/config/deploy/production.rb
+Type=simple
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target
