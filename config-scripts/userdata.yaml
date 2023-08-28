@@ -1,0 +1,14 @@
+#cloud-config
+datasource:
+ Ec2:
+  strict_id: false
+ssh_pwauth: no
+users:
+- name: yc-user
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDAJ+CoYx7E+cuAm1stpEB8AaWOb1FqIy8rM4R0o7n3GRuUaguDoo0jFRIp1EFC6869O0ajVbeZpm9s0TPl3GVqICkMur/4cXgO0SJtJ0lf7ZTfJ81fAVtBmJs5RveY4Fbc6Kc29TXZAEcjSnt0eK5U6lUhea/nYzLu0XhVbC3iLjMLVWsVZwWUzuklbiVfVrb1yRUAlCw++ZslFlNDNRrZ9mNx1ZFB7fWBATrLw3aKaJp4lytQpkRyFSta4a2qz4MaFYjzi6o6H/mbeWow0MYR/mQ1BTWLhVRYjtoJqmp9/pPikxh94VllhSVSKif22jN0aXugqwVQT87aBZo/EhAfOSdYKhtOfyBTju+ik0FVIihtJgGuPRO5UeSuzeLC4xFmxRYmCOWc+lJWQwJH8+GUA2HxrvBSIHxp4kYo4oO6Oxul6mk7rcf8tBIMPECM9EHyLQ833fBGMXWZQTzJG/AUITLNSfmQB04EdXpTdu9Nd6Oqy8OYHkD0MAJ/PmIwSq0= appuser'
+runcmd:
+- systemctl enable puma.service
+- systemctl start puma.service

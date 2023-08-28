@@ -1,5 +1,39 @@
 # arsentievvit_infra
 arsentievvit Infra repository
+# ДЗ №5
+
+## Основная часть
+
+- Произошло знакомство с инструментом packer
+- Выполнена сборка образа с добавлением нужных пакетов
+- Доустановка приложения и проверка его работы
+
+## Дополнительная часть
+
+- Создан файл сборки immutable образа, в котором всё работает
+- Создан скрипт запуска ВМ с последним образом из image-family
+
+## Запуск
+Для запуска потребуется настроенные 'yc'.
+
+Для сборки образа необходимо заполнить файл 'variables.json' своими значениями:
+```bash
+mv variables.json.example variables.json
+nano variables.json
+```
+Далее запустить сборщик:
+```bash
+packer build -var-file=variables.json immutable.pkr.hcl
+```
+
+После успешной отработки 'packer' переходим в директорию config-scripts \
+и запускаем create-reddit-vm.sh.
+```bash
+cd config-scripts
+./create-reddit-vm.sh
+```
+
+Проверяем в браузере http://IP:9292
 
 # ДЗ №4
 
