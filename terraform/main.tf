@@ -21,7 +21,6 @@ resource "yandex_compute_instance" "app" {
   network_interface {
     nat       = true
     subnet_id = var.subnet_id
-    zone      = var.zone
   }
   scheduling_policy {
     preemptible = true
@@ -43,7 +42,7 @@ resource "yandex_compute_instance" "app" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    host        = yandex_compute_instance.vm-1.network_interface[0].nat_ip_address
+    host        = yandex_compute_instance.app.network_interface[0].nat_ip_address
     agent       = false
     private_key = file(var.ssh_key_private_file)
   }
