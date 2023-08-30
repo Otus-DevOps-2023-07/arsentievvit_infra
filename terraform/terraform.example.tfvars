@@ -1,0 +1,7 @@
+cloud_id                 = "REDACTED"
+folder_id                = "REDACTED"
+service_account_key_file = "REDACTED"
+subnet_id                = "REDACTED"
+ssh_key_file             = "REDACTED"
+ssh_key_private_file     = "REDACTED"
+image_id                 = "REDACTED"
