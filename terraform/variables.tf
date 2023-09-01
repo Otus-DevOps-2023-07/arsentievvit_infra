@@ -1,39 +1,47 @@
 variable "cloud_id" {
-  type    = string
-  default = null
+  description = "ID of Yandex Cloud"
+  type        = string
+  default     = null
 }
 
 variable "folder_id" {
-  type    = string
-  default = null
+  description = "ID of a folder inside Yandex Cloud accound"
+  type        = string
+  default     = null
 }
 
 variable "service_account_key_file" {
-  type    = string
-  default = null
+  description = "Path to account key of service user"
+  type        = string
+  default     = null
 }
 
 variable "subnet_id" {
-  type    = string
-  default = null
+  description = "Default VPC subnet used"
+  type        = string
+  default     = null
 }
 
 variable "zone" {
-  type    = string
-  default = "ru-central1-a"
+  description = "Default zone used inside folder"
+  type        = string
+  default     = "ru-central1-a"
 }
 
 variable "ssh_key_file" {
-  type    = string
-  default = null
+  description = "Path to SSH pubkey that is transferred to VM via cloud-init metadata"
+  type        = string
+  default     = null
 }
 
 variable "ssh_key_private_file" {
-  type    = string
-  default = null
+  description = "Path to SSH private key used for connection to VM for provisioning"
+  type        = string
+  default     = null
 }
 
 variable "image_id" {
-  type    = string
-  default = null
+  description = "ID of an image that is used to create VM"
+  type        = string
+  default     = null
 }
