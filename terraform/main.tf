@@ -1,5 +1,5 @@
 provider "yandex" {
-  version                  = "0.95.0"
+  # version                  = "0.95.0"
   service_account_key_file = var.service_account_key_file
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "app" {
   }
 
   network_interface {
-    nat       = false
+    nat       = true
     subnet_id = var.subnet_id
   }
   scheduling_policy {
