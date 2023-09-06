@@ -35,7 +35,7 @@ resource "yandex_compute_instance" "bastion" {
 }
 
 resource "yandex_compute_instance" "app" {
-  count       = 2
+  count       = 1
   name        = "reddit-app-${count.index}"
   platform_id = "standard-v1"
   metadata = {
