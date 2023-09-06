@@ -17,34 +17,6 @@ resource "yandex_vpc_subnet" "app_subnet" {
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-data "yandex_compute_image" "def-ubuntu" {
-  family = "ubuntu-2004-lts"
-}
-
-resource "yandex_compute_instance" "bastion" {
-  name        = "bastion"
-  platform_id = "standard-v1"
-  metadata = {
-    ssh-keys = "ubuntu:${file(var.ssh_key_file)}"
-  }
-  resources {
-    cores         = 2
-    memory        = 2
-    core_fraction = 100
-  }
-  network_interface {
-    nat       = true
-    subnet_id = var.subnet_id
-  }
-  boot_disk {
-    initialize_params {
-      image_id = data.yandex_compute_image.def-ubuntu.id
-      size     = "10"
-      type     = "network-hdd"
-    }
-  }
-}
-
 resource "yandex_compute_instance" "app" {
   count       = 1
   name        = "reddit-app-${count.index}"
@@ -60,7 +32,7 @@ resource "yandex_compute_instance" "app" {
 
   network_interface {
     nat       = true
-    subnet_id = var.subnet_id
+    subnet_id = yandex_vpc_subnet.app_subnet.id
   }
   scheduling_policy {
     preemptible = true
@@ -80,14 +52,9 @@ resource "yandex_compute_instance" "app" {
     script = "files/deploy.sh"
   }
   connection {
-    bastion_host        = yandex_compute_instance.bastion.network_interface[0].nat_ip_address
-    bastion_port        = 22
-    bastion_user        = "ubuntu"
-    bastion_private_key = file(var.ssh_key_private_file)
-
     type        = "ssh"
     user        = "ubuntu"
-    host        = self.network_interface[0].ip_address
+    host        = self.network_interface[0].nat_ip_address
     agent       = false
     private_key = file(var.ssh_key_private_file)
   }
