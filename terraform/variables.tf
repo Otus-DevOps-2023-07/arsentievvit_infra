@@ -45,3 +45,13 @@ variable "image_id" {
   type        = string
   default     = null
 }
+
+variable "app_image_id" {
+  description = "Default image for reddit-app"
+  default = "reddit-app-base"
+}
+
+variable "db_image_id" {
+  description = "Default image for reddit-app-db"
+  default = "db"
+}
