@@ -9,6 +9,6 @@ variables.json
 *.tfvars
 .terraform/
 config.tf
-
+*pkrvars*
 # Allow
 !terraform.example.tfvars
