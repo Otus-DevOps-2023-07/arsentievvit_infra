@@ -28,3 +28,11 @@ variable "name" {
 variable "hostname" {
   type = string
 }
+
+variable "database_url" {
+  type = string
+}
+
+variable "user" {
+  default = "ubuntu"
+}

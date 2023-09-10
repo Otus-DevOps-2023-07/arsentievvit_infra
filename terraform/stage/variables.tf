@@ -41,21 +41,21 @@ variable "ssh_key_private_file" {
 }
 
 variable "db_disk_image" {
-  type = string
+  type    = string
   default = "db_disk_image"
 }
 
 variable "app_disk_image" {
-  type = string
+  type    = string
   default = "app_disk_image"
 }
 
 variable "app_name" {
-  type = string
+  type    = string
   default = "reddit-app-stage"
 }
 
 variable "db_name" {
-  type = string
+  type    = string
   default = "reddit-db-stage"
 }

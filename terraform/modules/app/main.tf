@@ -6,7 +6,7 @@ resource "yandex_compute_instance" "app" {
   }
   platform_id = "standard-v1"
   metadata = {
-    ssh-keys = "ubuntu:${file(var.ssh_key_file)}"
+    ssh-keys = "${var.user}:${file(var.ssh_key_file)}"
   }
   resources {
     cores         = 2
@@ -27,5 +27,20 @@ resource "yandex_compute_instance" "app" {
       size     = "15"
       type     = "network-hdd"
     }
+  }
+  provisioner "file" {
+    content      = templatefile("${path.module}/files/puma.service.tftpl", { database_url = var.database_url })
+    destination = "/tmp/puma.service"
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/files/deploy.sh"
+  }
+  connection {
+    type     = "ssh"
+    user     = var.user
+    private_key = "${file(var.ssh_key_private_file)}"
+    host     = self.network_interface[0].nat_ip_address
+    port = 22
   }
 }

@@ -6,27 +6,28 @@ provider "yandex" {
 }
 
 module "network" {
-  source = "../modules/vpc"
-  subnet_name = "prod-subnet"
-  network_name = "prod-network"
+  source         = "../modules/vpc"
+  subnet_name    = "prod-subnet"
+  network_name   = "prod-network"
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
 module "app" {
-  source = "../modules/app"
-  name = var.app_name
-  hostname = var.app_name
-  ssh_key_file = var.ssh_key_file
-  app_image_id = var.app_disk_image
+  source               = "../modules/app"
+  name                 = var.app_name
+  hostname             = var.app_name
+  ssh_key_file         = var.ssh_key_file
+  app_image_id         = var.app_disk_image
   ssh_key_private_file = var.ssh_key_private_file
-  subnet_id = module.network.subnet_id
+  subnet_id            = module.network.subnet_id
+  database_url         = module.db.db-external-ip
 }
 
 module "db" {
-  source = "../modules/db"
-  name = var.db_name
-  hostname = var.db_name
-  ssh_key_file = var.ssh_key_file
+  source        = "../modules/db"
+  name          = var.db_name
+  hostname      = var.db_name
+  ssh_key_file  = var.ssh_key_file
   db_disk_image = var.db_disk_image
-  subnet_id = module.network.subnet_id
-  }
+  subnet_id     = module.network.subnet_id
+}
