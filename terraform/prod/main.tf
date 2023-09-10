@@ -5,6 +5,13 @@ provider "yandex" {
   zone                     = var.zone
 }
 
+module "network" {
+  source = "../modules/vpc"
+  subnet_name = "prod-subnet"
+  network_name = "prod-network"
+  v4_cidr_blocks = ["192.168.10.0/24"]
+}
+
 module "app" {
   source = "../modules/app"
   name = var.app_name
@@ -12,7 +19,7 @@ module "app" {
   ssh_key_file = var.ssh_key_file
   app_image_id = var.app_disk_image
   ssh_key_private_file = var.ssh_key_private_file
-  subnet_id = yandex_vpc_subnet.prod_subnet.id
+  subnet_id = module.network.subnet_id
 }
 
 module "db" {
@@ -21,5 +28,5 @@ module "db" {
   hostname = var.db_name
   ssh_key_file = var.ssh_key_file
   db_disk_image = var.db_disk_image
-  subnet_id = yandex_vpc_subnet.prod_subnet.id
-}
+  subnet_id = module.network.subnet_id
+  }

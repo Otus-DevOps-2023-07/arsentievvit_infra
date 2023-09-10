@@ -5,21 +5,28 @@ provider "yandex" {
   zone                     = var.zone
 }
 
+module "network" {
+  source = "../modules/vpc"
+  subnet_name = "stage-subnet"
+  network_name = "stage-network"
+  v4_cidr_blocks = ["192.168.10.0/24"]
+}
+
 module "app" {
   source = "../modules/app"
-  name = "reddit-app-stage"
-  hostname = "reddit-app-stage"
+  name = var.app_name
+  hostname = var.app_name
   ssh_key_file = var.ssh_key_file
   app_image_id = var.app_disk_image
   ssh_key_private_file = var.ssh_key_private_file
-  subnet_id = yandex_vpc_subnet.stage_subnet.id
+  subnet_id = module.network.subnet_id
 }
 
 module "db" {
   source = "../modules/db"
-  name = "reddit-db-stage"
-  hostname = "reddit-db-stage"
+  name = var.app_name
+  hostname = var.app_name
   ssh_key_file = var.ssh_key_file
   db_disk_image = var.db_disk_image
-  subnet_id = yandex_vpc_subnet.stage_subnet.id
+  subnet_id = module.network.subnet_id
 }
