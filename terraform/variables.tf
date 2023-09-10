@@ -40,18 +40,12 @@ variable "ssh_key_private_file" {
   default     = null
 }
 
-variable "image_id" {
-  description = "ID of an image that is used to create VM"
-  type        = string
-  default     = null
+variable "db_disk_image" {
+  type = string
+  default = "db_disk_image"
 }
 
-variable "app_image_id" {
-  description = "Default image for reddit-app"
-  default = "reddit-app-base"
-}
-
-variable "db_image_id" {
-  description = "Default image for reddit-app-db"
-  default = "db"
+variable "app_disk_image" {
+  type = string
+  default = "app_disk_image"
 }

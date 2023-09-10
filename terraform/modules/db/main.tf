@@ -1,4 +1,5 @@
 resource "yandex_compute_instance" "db" {
+  hostname = "reddit-db"
   name        = "reddit-db"
   labels  = {
     tags = "reddit-db"
@@ -15,30 +16,16 @@ resource "yandex_compute_instance" "db" {
 
   network_interface {
     nat       = true
-    subnet_id = yandex_vpc_subnet.app_subnet.id
+    subnet_id = var.subnet_id
   }
   scheduling_policy {
     preemptible = true
   }
   boot_disk {
     initialize_params {
-      image_id = var.image_id
+      image_id = var.db_disk_image
       size     = "15"
       type     = "network-hdd"
     }
   }
-  # provisioner "file" {
-  #   source      = "files/puma.service"
-  #   destination = "/tmp/puma.service"
-  # }
-  # provisioner "remote-exec" {
-  #   script = "files/deploy.sh"
-  # }
-  # connection {
-  #   type        = "ssh"
-  #   user        = "ubuntu"
-  #   host        = self.network_interface[0].nat_ip_address
-  #   agent       = false
-  #   private_key = file(var.ssh_key_private_file)
-  # }
 }
