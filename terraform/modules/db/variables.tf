@@ -15,3 +15,10 @@ variable "subnet_id" {
   type        = string
   default     = null
 }
+variable "name" {
+  type = string
+}
+
+variable "hostname" {
+  type = string
+}

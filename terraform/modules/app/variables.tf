@@ -20,3 +20,11 @@ variable "ssh_key_private_file" {
   type = string
   default = null
 }
+
+variable "name" {
+  type = string
+}
+
+variable "hostname" {
+  type = string
+}

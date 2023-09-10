@@ -49,3 +49,13 @@ variable "app_disk_image" {
   type = string
   default = "app_disk_image"
 }
+
+variable "app_name" {
+  type = string
+  default = "reddit-app-prod"
+}
+
+variable "db_name" {
+  type = string
+  default = "reddit-db-prod"
+}

@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "db" {
-  hostname = "reddit-db"
-  name        = "reddit-db"
+  name = var.name
+  hostname = var.hostname
   labels  = {
     tags = "reddit-db"
   }
