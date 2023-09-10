@@ -13,5 +13,6 @@ config.tf
 *pkrvars*
 key.json
 terraform/modules/network
+
 # Allow
 !terraform.example.tfvars
