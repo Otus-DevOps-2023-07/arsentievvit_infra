@@ -21,7 +21,6 @@ module "app" {
   ssh_key_private_file = var.ssh_key_private_file
   subnet_id            = module.network.subnet_id
   database_url         = module.db.db-external-ip
-  depends_on = [ module.db ]
 }
 
 module "db" {
