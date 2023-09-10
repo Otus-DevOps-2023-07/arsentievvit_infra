@@ -1,7 +1,7 @@
 resource "yandex_compute_instance" "app" {
-  name = var.name
+  name     = var.name
   hostname = var.hostname
-  labels  = {
+  labels = {
     tags = "reddit-app"
   }
   platform_id = "standard-v1"
@@ -29,7 +29,7 @@ resource "yandex_compute_instance" "app" {
     }
   }
   provisioner "file" {
-    content      = templatefile("${path.module}/files/puma.service.tftpl", { database_url = var.database_url })
+    content     = templatefile("${path.module}/files/puma.service.tftpl", { database_url = var.database_url })
     destination = "/tmp/puma.service"
   }
 
@@ -37,10 +37,10 @@ resource "yandex_compute_instance" "app" {
     script = "${path.module}/files/deploy.sh"
   }
   connection {
-    type     = "ssh"
-    user     = var.user
-    private_key = "${file(var.ssh_key_private_file)}"
-    host     = self.network_interface[0].nat_ip_address
-    port = 22
+    type        = "ssh"
+    user        = var.user
+    private_key = file(var.ssh_key_private_file)
+    host        = self.network_interface[0].nat_ip_address
+    port        = 22
   }
 }

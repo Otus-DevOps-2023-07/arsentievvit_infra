@@ -1,6 +1,6 @@
 variable "app_image_id" {
   description = "Default image for reddit-app"
-  default = "reddit-app-base"
+  default     = "reddit-app-base"
 }
 
 variable "ssh_key_file" {
@@ -17,8 +17,8 @@ variable "subnet_id" {
 
 variable "ssh_key_private_file" {
   description = "SSH private key that is transferred to APP instance"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "name" {
