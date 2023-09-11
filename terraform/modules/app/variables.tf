@@ -34,5 +34,5 @@ variable "database_url" {
 }
 
 variable "user" {
-  default = "ubuntu"
+  default = "appuser"
 }
