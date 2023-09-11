@@ -1,0 +1,6 @@
+endpoint                    = "storage.yandexcloud.net"
+bucket                      = {BUCKET_NAME}
+region                      = {REGION}
+key                         = {FOLDER_AND_TF_FILENAME}
+skip_region_validation      = true
+skip_credentials_validation = true

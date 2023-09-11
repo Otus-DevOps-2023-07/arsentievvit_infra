@@ -1,0 +1,14 @@
+# Cloud ID for yandex cloud
+cloud_id                 = "REDACTED"
+# Folder ID for yandex cloud
+folder_id                = "REDACTED"
+# Yandex service account key file
+service_account_key_file = "REDACTED"
+# Public SSH key file
+ssh_key_file             = "REDACTED"
+# Privite ssh key file
+ssh_key_private_file     = "REDACTED"
+# Id of disk user for db creation
+db_disk_image            = "REDACTED"
+# Id of disk used for app creation
+app_disk_image           = "REDACTED"

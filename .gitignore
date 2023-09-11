@@ -8,7 +8,11 @@ variables.json
 *.tfstate.backup
 *.tfvars
 .terraform/
+config.tf.*
 config.tf
+*pkrvars*
+key.json
+terraform/modules/network
 
 # Allow
 !terraform.example.tfvars
