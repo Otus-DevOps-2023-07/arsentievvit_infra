@@ -7,7 +7,7 @@
         "source_image_family": "ubuntu-1604-lts",
         "image_name": "reddit-app-base-{{timestamp}}",
         "image_family": "reddit-app-base",
-        "ssh_username": "appuser",
+        "ssh_username": "ubuntu",
         "use_ipv4_nat": "true",
         "platform_id": "standard-v1",
         "subnet_id": "{{user `yc_subnet_id`}}",
