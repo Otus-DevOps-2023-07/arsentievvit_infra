@@ -9,6 +9,7 @@ variables.json
 *.tfvars
 .terraform/
 *pkrvars*
+config.tf
 key.json
 terraform/modules/network
 
