@@ -22,3 +22,8 @@ variable "name" {
 variable "hostname" {
   type = string
 }
+
+variable "user" {
+  type = string
+  default = "ubuntu"
+}

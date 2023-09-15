@@ -8,9 +8,8 @@ variables.json
 *.tfstate.backup
 *.tfvars
 .terraform/
-config.tf.*
-config.tf
 *pkrvars*
+config.tf
 key.json
 terraform/modules/network
 

@@ -6,7 +6,7 @@ resource "yandex_compute_instance" "db" {
   }
   platform_id = "standard-v1"
   metadata = {
-    ssh-keys = "ubuntu:${file(var.ssh_key_file)}"
+    ssh-keys = "${var.user}:${file(var.ssh_key_file)}"
   }
   resources {
     cores         = 2
