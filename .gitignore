@@ -12,6 +12,7 @@ variables.json
 config.tf
 key.json
 terraform/modules/network
+*.retry
 
 # Allow
 !terraform.example.tfvars
