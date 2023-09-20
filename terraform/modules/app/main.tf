@@ -28,19 +28,19 @@ resource "yandex_compute_instance" "app" {
       type     = "network-hdd"
     }
   }
-  provisioner "file" {
-    content     = templatefile("${path.module}/files/puma.service.tftpl", { database_url = var.database_url })
-    destination = "/tmp/puma.service"
-  }
+  # provisioner "file" {
+  #   content     = templatefile("${path.module}/files/puma.service.tftpl", { database_url = var.database_url })
+  #   destination = "/tmp/puma.service"
+  # }
 
-  provisioner "remote-exec" {
-    script = "${path.module}/files/deploy.sh"
-  }
-  connection {
-    type        = "ssh"
-    user        = var.user
-    private_key = file(var.ssh_key_private_file)
-    host        = self.network_interface[0].nat_ip_address
-    port        = 22
-  }
+  # provisioner "remote-exec" {
+  #   script = "${path.module}/files/deploy.sh"
+  # }
+  # connection {
+  #   type        = "ssh"
+  #   user        = var.user
+  #   private_key = file(var.ssh_key_private_file)
+  #   host        = self.network_interface[0].nat_ip_address
+  #   port        = 22
+  # }
 }
