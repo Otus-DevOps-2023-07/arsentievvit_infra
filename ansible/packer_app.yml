@@ -1,6 +1,5 @@
----
 - name: Install dependencies for reddit app
-  hosts: default
+  hosts: all
   become: true
   tasks:
     - name: Update apt cache and install dependencies

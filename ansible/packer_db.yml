@@ -1,7 +1,7 @@
 ---
 - name: Install application dependencies in packer provisioner
   become: true
-  hosts: default
+  hosts: all
   tasks:
     - name: Update repo
       apt:
