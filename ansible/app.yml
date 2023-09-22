@@ -7,15 +7,15 @@
   tasks:
     - name: Install puma service
       become: true
-      ansible.builtin.copy:
+      copy:
         src: ./files/puma.service
         dest: /etc/systemd/system/puma.service
     - name: reload-daemons
       become: true
-      ansible.builtin.shell:
+      shell:
         cmd: systemctl daemon-reload
     - name: Add config for DB connection
-      ansible.builtin.template:
+      template:
         src: templates/db_config.j2
         dest: /home/ubuntu/db_config
         owner: ubuntu
@@ -24,7 +24,7 @@
       - restart puma
     - name: enable puma.service
       become: true
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         enabled: true
       notify:
@@ -32,6 +32,6 @@
   handlers:
     - name: restart puma
       become: true
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         state: restarted
