@@ -7,7 +7,7 @@
   tasks:
     - name: Change mongo config file
       become: true
-      ansible.builtin.template:
+      template:
         src: templates/mongod.conf.j2
         dest: /etc/mongodb.conf
         mode: 0644
@@ -16,6 +16,6 @@
   handlers:
     - name: restart mongodb
       become: true
-      ansible.builtin.service:
+      systemd:
         name: mongodb
         state: restarted
