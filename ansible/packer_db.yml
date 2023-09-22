@@ -9,13 +9,13 @@
         name: mongodb
         state: present
     - name: Enable mongodb
-      ansible.builtin.systemd:
+      systemd:
         name: mongodb
         enabled: true
       notify:
       - restart mongodb
   handlers:
   - name: restart mongodb
-    ansible.builtin.systemd:
+    systemd:
       name: mongodb
       state: restarted

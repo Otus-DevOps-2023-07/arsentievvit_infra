@@ -8,7 +8,7 @@
 
     - name: Change mongo config file
       become: true
-      ansible.builtin.template:
+      template:
         src: templates/mongod.conf.j2
         dest: /etc/mongodb.conf
         mode: 0644
@@ -23,31 +23,31 @@
         version: monolith
       tags: deploy-tag
     - name: Bundle install
-      community.general.bundler:
+      bundler:
         state: present
         chdir: /home/ubuntu/reddit
       tags: deploy-tag
     - name: Install puma service
       become: true
-      ansible.builtin.copy:
+      copy:
         src: ./files/puma.service
         dest: /etc/systemd/system/puma.service
       tags: app-tag
 
     - name: reload-daemons
       become: true
-      ansible.builtin.shell:
+      shell:
         cmd: systemctl daemon-reload
       tags: app-tag
     - name: Add config for DB connection
-      ansible.builtin.template:
+      template:
         src: templates/db_config.j2
         dest: /home/ubuntu/db_config
       tags: app-tag
 
     - name: enable puma.service
       become: true
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         enabled: true
       tags: app-tag
@@ -57,11 +57,11 @@
   handlers:
     - name: restart mongodb
       become: true
-      ansible.builtin.service:
+      service:
         name: mongodb
         state: restarted
     - name: restart puma
       become: true
-      ansible.builtin.systemd:
+      systemd:
         name: puma
         state: restarted
