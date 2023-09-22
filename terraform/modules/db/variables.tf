@@ -7,7 +7,7 @@ variable "ssh_key_file" {
 variable "db_disk_image" {
   description = "Default db disk image name"
   type        = string
-  default     = "db"
+  default     = "reddit-app-db"
 }
 
 variable "subnet_id" {

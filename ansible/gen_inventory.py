@@ -34,7 +34,6 @@ GET_URL="https://compute.api.cloud.yandex.net/compute/v1/instances"
 # Запрос к URL, используя заголовки и передаваемые параметры
 # Кодируем в json
 data = requests.get(url=GET_URL, headers=HEADERS, params=PARAMETERS).json()
-
 # Инициализируем первую часть шаблона инвентаря
 vars = {
     "_meta": {
@@ -64,16 +63,16 @@ for instance in data['instances']:
 group = {
     'all': {
         "children": [
-            'redditapp',
-            'redditdb',
+            'app',
+            'db',
             'stage',
             'prod'
         ]
     },
-    'redditapp': {
+    'app': {
         "hosts": []
     },
-    'redditdb': {
+    'db': {
         "hosts": []
     },
     'stage': {
@@ -95,10 +94,10 @@ for hostname in vars['_meta']['hostvars'].keys():
         group['prod']['hosts'].append(hostname)
 for hostname in vars['_meta']['hostvars'].keys():
     if 'reddit-db' in hostname:
-        group['redditdb']['hosts'].append(hostname)
+        group['db']['hosts'].append(hostname)
 for hostname in vars['_meta']['hostvars'].keys():
     if 'reddit-app' in hostname:
-        group['redditapp']['hosts'].append(hostname)
+        group['app']['hosts'].append(hostname)
 
 # Инициализируем пустой инвентарь, добавляем в него оба заполненных элемента,
 # Выводим в печать для ansible

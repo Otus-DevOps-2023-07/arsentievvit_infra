@@ -1,0 +1,13 @@
+---
+- name: Install dependencies for reddit app
+  hosts: default
+  become: true
+  tasks:
+    - name: Update apt cache and install dependencies
+      ansible.builtin.apt:
+        update_cache: true
+        pkg:
+          - git
+          - ruby-full
+          - ruby-bundler
+          - build-essential

@@ -1,0 +1,21 @@
+---
+- name: Install application dependencies in packer provisioner
+  become: true
+  hosts: default
+  tasks:
+    - name: Update repo
+      apt:
+        update_cache: true
+        name: mongodb
+        state: present
+    - name: Enable mongodb
+      ansible.builtin.systemd:
+        name: mongodb
+        enabled: true
+      notify:
+      - restart mongodb
+  handlers:
+  - name: restart mongodb
+    ansible.builtin.systemd:
+      name: mongodb
+      state: restarted
