@@ -1,0 +1,21 @@
+prod:
+  hosts:
+    app-prod:
+      ansible_host: 158.160.48.82
+    db-prod:
+      ansible_host: 51.250.5.176
+stage:
+  hosts:
+    app-stage:
+      ansible_host: 130.193.36.61
+    db-stage:
+      ansible_host: 158.160.35.127
+
+app:
+  hosts:
+    app-stage:
+    app-prod:
+db:
+  hosts:
+    db-stage:
+    db-prod:
