@@ -1,6 +1,6 @@
 variable "app_image_id" {
   description = "Default image for reddit-app"
-  default     = "reddit-app-base"
+  default     = "reddit-app-ansible"
 }
 
 variable "ssh_key_file" {

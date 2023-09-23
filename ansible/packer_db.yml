@@ -1,0 +1,21 @@
+---
+- name: Install application dependencies in packer provisioner
+  become: true
+  hosts: all
+  tasks:
+    - name: Update repo
+      apt:
+        update_cache: true
+        name: mongodb
+        state: present
+    - name: Enable mongodb
+      systemd:
+        name: mongodb
+        enabled: true
+      notify:
+      - restart mongodb
+  handlers:
+  - name: restart mongodb
+    systemd:
+      name: mongodb
+      state: restarted

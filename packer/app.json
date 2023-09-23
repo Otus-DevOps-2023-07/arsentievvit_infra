@@ -5,8 +5,8 @@
         "service_account_key_file": "{{user `yc_service_account_key_file`}}",
         "folder_id": "{{user `yc_folder_id`}}",
         "source_image_family": "ubuntu-1604-lts",
-        "image_name": "reddit-app-base-{{timestamp}}",
-        "image_family": "reddit-app-base",
+        "image_name": "reddit-app-ansible-{{timestamp}}",
+        "image_family": "reddit-app-ansible",
         "ssh_username": "ubuntu",
         "use_ipv4_nat": "true",
         "platform_id": "standard-v1",
@@ -18,10 +18,8 @@
 
     "provisioners": [
         {
-            "type": "shell",
-            "script": "./scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}",
-            "pause_before": "10s"
+            "type": "ansible",
+            "playbook_file": "ansible/packer_app.yml"
         }
     ]
 }
