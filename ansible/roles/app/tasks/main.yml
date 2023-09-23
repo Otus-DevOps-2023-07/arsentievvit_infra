@@ -7,9 +7,6 @@
   copy:
     src: puma.service
     dest: /etc/systemd/system/puma.service
-- name: reload-daemons
-  shell:
-    cmd: systemctl daemon-reload
 - name: Add config for DB connection
   template:
     src: db_config.j2
@@ -20,6 +17,7 @@
     - restart puma
 - name: enable puma.service
   systemd:
+    daemon-reload: true
     name: puma
     enabled: true
   notify:
