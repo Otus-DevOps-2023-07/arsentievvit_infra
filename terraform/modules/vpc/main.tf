@@ -35,6 +35,13 @@ resource "yandex_vpc_default_security_group" "securitygroup" {
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+      description = "HTTP"
+      protocol = "TCP"
+      port = 80
+      v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     protocol = "ANY"
     description = "Allow outgoing"

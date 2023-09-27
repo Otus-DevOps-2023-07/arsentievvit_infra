@@ -1,0 +1,24 @@
+---
+# tasks file for app
+- name: Show info about current environment
+  debug:
+    msg: "This host is in the {{ env }} environment."
+- name: Install puma service
+  copy:
+    src: puma.service
+    dest: /etc/systemd/system/puma.service
+- name: Add config for DB connection
+  template:
+    src: db_config.j2
+    dest: /home/ubuntu/db_config
+    owner: ubuntu
+    group: ubuntu
+  notify:
+    - restart puma
+- name: enable puma.service
+  systemd:
+    daemon-reload: true
+    name: puma
+    enabled: true
+  notify:
+    - restart puma

@@ -13,6 +13,8 @@ config.tf
 key.json
 terraform/modules/network
 *.retry
+vault.key
+jdauphant.nginx
 
 # Allow
 !terraform.example.tfvars

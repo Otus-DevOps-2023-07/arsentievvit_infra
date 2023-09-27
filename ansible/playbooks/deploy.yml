@@ -1,7 +1,6 @@
 ---
 - name: Deploy app
   hosts: app
-  tags: deploy-tag
   tasks:
   - name: Fetch latest version of app
     git:

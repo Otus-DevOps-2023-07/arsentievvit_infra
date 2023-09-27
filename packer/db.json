@@ -1,6 +1,6 @@
 {
   "builders": [
-      {
+    {
       "type": "yandex",
       "service_account_key_file": "{{user `yc_service_account_key_file`}}",
       "folder_id": "{{user `yc_folder_id`}}",
@@ -13,12 +13,12 @@
       "subnet_id": "{{user `yc_subnet_id`}}",
       "disk_type": "network-hdd",
       "disk_size_gb": "10"
-      }
+    }
   ],
   "provisioners": [
     {
-        "type": "ansible",
-        "playbook_file": "ansible/packer_db.yml"
+      "type": "ansible",
+      "playbook_file": "ansible/playbooks/packer_db.yml"
     }
   ]
 }
