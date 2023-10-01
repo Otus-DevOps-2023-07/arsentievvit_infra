@@ -18,7 +18,9 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/playbooks/packer_db.yml"
+      "playbook_file": "ansible/playbooks/packer_db.yml",
+      "use_proxy": false,
+      "extra_arguments": ["--tags", "install"]
     }
   ]
 }
