@@ -22,6 +22,7 @@ jdauphant.nginx
 .molecule
 .cache
 .pytest_cache
+venv/
 
 # Allow
 !terraform.example.tfvars
