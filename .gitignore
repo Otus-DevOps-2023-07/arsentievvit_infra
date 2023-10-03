@@ -15,6 +15,14 @@ terraform/modules/network
 *.retry
 vault.key
 jdauphant.nginx
+# Vagrant & molecule
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
+venv/
 
 # Allow
 !terraform.example.tfvars

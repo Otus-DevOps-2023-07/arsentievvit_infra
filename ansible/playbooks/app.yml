@@ -2,5 +2,13 @@
   hosts: app
   become: true
   roles:
-    - jdauphant.nginx
-    - app
+    - role: jdauphant.nginx
+      vars:
+        nginx_sites:
+          default:
+            - listen 80
+            - server_name "Reddit"
+            - location / {
+                proxy_pass http://127.0.0.1:9292;
+              }
+    - role: app

@@ -1,0 +1,12 @@
+---
+- name: Show info about current environment
+  debug:
+    msg: "This host is in the {{ env }} environment."
+- name: Change mongo config file
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    mode: 0644
+  tags: install
+  notify:
+  - restart mongodb

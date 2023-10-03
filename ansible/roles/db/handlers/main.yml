@@ -2,5 +2,5 @@
 # handlers file for db
 - name: restart mongodb
   systemd:
-    name: mongodb
+    name: mongod.service
     state: restarted

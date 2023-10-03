@@ -1,0 +1,10 @@
+---
+- name: update apt cache and install dependencies
+  apt:
+    update_cache: true
+    pkg:
+      - git
+      - ruby-full
+      - ruby-bundler
+      - build-essential
+  tags: ruby
